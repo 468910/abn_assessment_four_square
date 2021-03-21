@@ -1,6 +1,6 @@
 package abn.assessment.kees.data.api
 
-import abn.assessment.kees.data.models.Venue
+import abn.assessment.kees.domain.models.Venue
 
 data class FourSquareApiResponse<T>(
     val meta : Meta,
@@ -9,6 +9,10 @@ data class FourSquareApiResponse<T>(
 
 data class FourSquareVenues(
     val venues: List<Venue>
+)
+
+data class FourSquareVenueDetail(
+    val venue: Venue
 )
 
 data class Meta(

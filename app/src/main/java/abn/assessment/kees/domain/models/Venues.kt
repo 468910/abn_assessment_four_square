@@ -1,4 +1,4 @@
-package abn.assessment.kees.data.models
+package abn.assessment.kees.domain.models
 
 data class Venue(
     val id: String,

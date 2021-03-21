@@ -30,6 +30,9 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 dependencies {
@@ -41,9 +44,20 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.4'
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.4'
+    implementation "androidx.lifecycle:lifecycle-common-java8:+"
+
 
     implementation 'com.squareup.retrofit2:retrofit:+'
     implementation 'com.squareup.retrofit2:converter-gson:+'
+
+    // Koin for Kotlin apps
+    implementation group: 'io.insert-koin', name: 'koin-core-jvm', version: '3.0.1-beta-1'
+    implementation group: 'io.insert-koin', name: 'koin-core-ext', version: '3.0.1-beta-1'
+    implementation group: 'io.insert-koin', name: 'koin-android', version: '3.0.1-beta-1'
+    implementation group: 'androidx.lifecycle', name: 'lifecycle-viewmodel-ktx', version: '2.3.0'
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:+"
+
+
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
