@@ -41,6 +41,7 @@ class FourSquareVenueDetailFragment : Fragment(R.layout.fragment_foursquare_venu
 
     private fun updateUI(uiModel: FourSquareVenueDetailUIModel) {
         binding.venueName.text = uiModel.titleAndRating
+        binding.venueDescription.text = uiModel.city
         binding.phoneNumberLabel.text = uiModel.phoneNumber
         binding.venueAddress.text = uiModel.address
 
