@@ -1,4 +1,4 @@
-package abn.assessment.kees.data.api.repo
+package abn.assessment.kees.data.repo
 
 import abn.assessment.kees.domain.models.Venue
 import kotlinx.coroutines.flow.Flow

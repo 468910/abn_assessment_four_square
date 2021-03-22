@@ -1,6 +1,6 @@
 package abn.assessment.kees.domain.usecase
 
-import abn.assessment.kees.data.api.repo.IFourSquareRepo
+import abn.assessment.kees.data.repo.IFourSquareRepo
 import abn.assessment.kees.domain.models.Venue
 import kotlinx.coroutines.flow.Flow
 

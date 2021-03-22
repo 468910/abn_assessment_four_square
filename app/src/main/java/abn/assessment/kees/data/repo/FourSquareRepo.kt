@@ -1,11 +1,11 @@
-package abn.assessment.kees.data.api.repo
+package abn.assessment.kees.data.repo
 
 import abn.assessment.kees.data.api.FourSquareService
 import abn.assessment.kees.domain.models.Venue
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
-class FourSquareRepo(val service: FourSquareService, val offlineFourSquareService: OfflineFourSquareService) : IFourSquareRepo {
+class FourSquareRepo(val service: FourSquareService) : IFourSquareRepo {
 
     override fun searchRevenues(near: String?): Flow<List<Venue>> {
         return flow {
