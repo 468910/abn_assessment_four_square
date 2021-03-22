@@ -9,6 +9,7 @@ import android.net.NetworkCapabilities
 import android.net.NetworkInfo
 import android.os.Build
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.asFlow
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -16,7 +17,7 @@ import kotlinx.coroutines.flow.StateFlow
 /**
  * Should be a MutableStateFlow but for velocity sake just using a copy/pasted livedata here
  */
-class ConnectionLiveData(private val context: Context) : LiveData<Boolean>() {
+class ConnectionLiveData(private val context: Context) : LiveData<Boolean>(), ConnectionFlow {
 
     private val networkReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
@@ -38,6 +39,10 @@ class ConnectionLiveData(private val context: Context) : LiveData<Boolean>() {
             context.unregisterReceiver(networkReceiver)
         } catch (e: Exception) {
         }
+    }
+
+    override fun getFlow(): Flow<Boolean> {
+        return this.asFlow()
     }
 }
 val Context.isConnected: Boolean

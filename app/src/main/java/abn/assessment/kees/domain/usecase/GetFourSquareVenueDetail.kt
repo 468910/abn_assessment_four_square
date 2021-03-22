@@ -7,10 +7,10 @@ import kotlinx.coroutines.flow.Flow
 /**
  * Could use a interface here but just keeping it simple for assessment purposes.
  */
-class GetFourSquareVenueDetail(val IFourSquareRepo: IFourSquareRepo) {
+class GetFourSquareVenueDetail(private val iFourSquareRepo: IFourSquareRepo) {
 
     suspend fun getRevenueDetail(venueId: String): Flow<Venue> {
-        return IFourSquareRepo.getRevenueDetail(venueId = venueId)
+        return iFourSquareRepo.getRevenueDetail(venueId = venueId)
     }
 
 }

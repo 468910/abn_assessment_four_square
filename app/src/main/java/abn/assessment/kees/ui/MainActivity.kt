@@ -22,7 +22,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     private val nearbyMeViewModel: AbnAssessmentViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        KoinStarter.start(applicationContext)
         super.onCreate(savedInstanceState)
     }
 }

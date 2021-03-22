@@ -13,8 +13,8 @@ interface VenueDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(pickUpPointRoomModel: VenueRoomModel)
 
-    @Query("SELECT * FROM Venues")
-    suspend fun findAll(): List<VenueRoomModel>
+    @Query("SELECT * FROM Venues WHERE city = :city")
+    suspend fun findAll(city: String): List<VenueRoomModel>
 
     @Query("SELECT * FROM Venues WHERE id = :venueId")
     suspend fun find(venueId: String): VenueRoomModel

@@ -1,6 +1,7 @@
 package abn.assessment.kees.di
 
 import abn.assessment.kees.AbnAssessmentViewModel
+import abn.assessment.kees.data.ConnectionFlow
 import abn.assessment.kees.data.ConnectionLiveData
 import abn.assessment.kees.data.api.FourSquareService
 import abn.assessment.kees.data.repo.FourSquareRepo
@@ -22,7 +23,7 @@ val abnAssessmentModule = module {
         Room.databaseBuilder(androidContext(), AppRoomDatabase::class.java, "room-db").build()
     }
 
-    single {
+    single<ConnectionFlow> {
         ConnectionLiveData(get())
     }
 

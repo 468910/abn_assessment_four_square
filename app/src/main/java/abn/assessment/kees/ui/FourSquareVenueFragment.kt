@@ -17,9 +17,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 
-/**
- * A simple [Fragment] subclass as the default destination in the navigation.
- */
 class FourSquareVenueFragment : Fragment(R.layout.fragment_foursquare_venue) {
 
     private val binding by fragmentViewBinding(FragmentFoursquareVenueBinding::bind)

@@ -17,12 +17,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-/**
- * A simple [Fragment] subclass as the second destination in the navigation.
- */
 class FourSquareVenueDetailFragment : Fragment(R.layout.fragment_foursquare_venue_detail) {
 
     private val binding by fragmentViewBinding(FragmentFoursquareVenueDetailBinding::bind)
@@ -44,5 +43,12 @@ class FourSquareVenueDetailFragment : Fragment(R.layout.fragment_foursquare_venu
         binding.venueName.text = uiModel.titleAndRating
         binding.phoneNumberLabel.text = uiModel.phoneNumber
         binding.venueAddress.text = uiModel.address
+
+        Glide.with(requireActivity())
+            .load(uiModel.imageUrl)
+            .centerCrop()
+            .placeholder(R.drawable.ic_launcher_background)
+            .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+            .into(binding.revenueBestPhoto)
     }
 }

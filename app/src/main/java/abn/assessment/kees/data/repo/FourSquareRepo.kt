@@ -1,5 +1,6 @@
 package abn.assessment.kees.data.repo
 
+import abn.assessment.kees.data.ConnectionFlow
 import abn.assessment.kees.data.ConnectionLiveData
 import abn.assessment.kees.data.api.FourSquareService
 import abn.assessment.kees.data.room.VenueDao
@@ -13,46 +14,44 @@ import kotlinx.coroutines.flow.map
 class FourSquareRepo(
     private val service: FourSquareService,
     private val venueDao: VenueDao,
-    private val connectionLiveData: ConnectionLiveData
+    private val connectionFlow: ConnectionFlow
 ) : IFourSquareRepo {
 
-    override fun searchRevenues(near: String?): Flow<List<Venue>> {
-        return connectionLiveData.asFlow().map { isOnline ->
-            if(!isOnline) {
-                val cachedData = venueDao.findAll()
-                return@map cachedData.map { Venue.mapFrom(it) }
-            } else {
-                val revenues = service.searchRevenues(near = near).response.venues
+    override fun searchRevenues(city: String): Flow<List<Venue>> {
+        return connectionFlow.getFlow().map { isOnline ->
+            var venues = venueDao.findAll(city).map { Venue.mapFrom(it) }
+            if (isOnline) {
                 try {
-                    venueDao.insert(revenues.map { VenueRoomModel.mapFrom(it) })
-                } catch (exception : Exception) {
-                    val x = exception
+                    val retrievedVenues = service.searchRevenues(near = city).response.venues
+                    venueDao.insert(retrievedVenues.map { VenueRoomModel.mapFrom(it) })
+                    if (retrievedVenues.isNotEmpty()) {
+                        venues = retrievedVenues
+                    }
+                } catch (exception: Exception) {
+
                 }
-                revenues
             }
+            return@map venues
         }.catch {
-            print("hey")
-            print("hey")
+
         }
     }
 
     override suspend fun getRevenueDetail(venueId: String): Flow<Venue> {
-        return connectionLiveData.asFlow().map { isOnline ->
-            if(!isOnline) {
-                val cachedData = venueDao.find(venueId)
-                return@map Venue.mapFrom(cachedData)
-            } else {
-                val venue = service.getRevenueDetail(id = venueId).response.venue
+        return connectionFlow.getFlow().map { isOnline ->
+            var venue = Venue.mapFrom(venueDao.find(venueId))
+            if (isOnline) {
                 try {
+                    val retrievedVenue = service.getRevenueDetail(id = venueId).response.venue
                     venueDao.insert(VenueRoomModel.mapFrom(venue))
-                } catch (exception : Exception) {
-                    val x = exception
+                    venue = retrievedVenue
+                } catch (exception: Exception) {
+                    // 429 prolly if rate reached
                 }
-                venue
             }
+            venue
         }.catch {
-            print("hey")
-            print("hey")
+
         }
     }
 }

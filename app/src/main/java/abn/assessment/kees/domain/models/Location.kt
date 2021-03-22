@@ -5,7 +5,8 @@ data class Location(
     val lat: Double,
     val lng: Double,
     val cc: String,
-    val city: String,
+    // Can be null for some reason
+    val city: String? = null,
     val country: String,
     val formattedAddress: List<String>
 )

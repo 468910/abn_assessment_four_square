@@ -20,11 +20,11 @@ class AbnAssessmentViewModel(
     val filter = MutableStateFlow<String>("Amsterdam")
 
     val venues: LiveData<List<FourSquareVenueUIModel>> = filter.flatMapLatest {
-        getFourSquareVenues.searchRevenues(near = it)
+        getFourSquareVenues.searchRevenues(city = it)
     }.map {
         return@map it.map { FourSquareVenueUIModel.map(it) }
     }.catch {
-
+        // TODO
     }.asLiveData()
 
 
@@ -32,6 +32,8 @@ class AbnAssessmentViewModel(
 
     val venue : LiveData<Venue> = selectedVenueId.filter { it.isNotEmpty() }.flatMapLatest {
         getFourSquareVenueDetail.getRevenueDetail(it)
+    }.catch {
+       // TODO
     }.asLiveData()
 
 }

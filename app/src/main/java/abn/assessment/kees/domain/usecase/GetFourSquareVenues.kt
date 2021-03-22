@@ -10,8 +10,8 @@ import kotlinx.coroutines.flow.Flow
 class GetFourSquareVenues(private val IFourSquareRepo: IFourSquareRepo) {
 
     fun searchRevenues(
-        near: String? = null,
+        city: String
     ): Flow<List<Venue>> {
-        return IFourSquareRepo.searchRevenues(near)
+        return IFourSquareRepo.searchRevenues(city)
     }
 }

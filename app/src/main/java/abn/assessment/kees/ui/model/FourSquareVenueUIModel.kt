@@ -12,7 +12,7 @@ data class FourSquareVenueUIModel(
            return FourSquareVenueUIModel(
                id = venue.id,
                name = venue.name,
-               location = venue.location.country
+               location = venue.location.city ?: ""
            )
         }
     }

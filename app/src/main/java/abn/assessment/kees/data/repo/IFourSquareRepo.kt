@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 interface IFourSquareRepo {
 
     fun searchRevenues(
-        near: String? = null,
+        city: String
     ): Flow<List<Venue>>
 
     suspend fun getRevenueDetail(venueId: String) : Flow<Venue>
