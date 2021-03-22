@@ -9,5 +9,5 @@ interface IFourSquareRepo {
         near: String? = null,
     ): Flow<List<Venue>>
 
-    suspend fun getRevenueDetail(venueId: String) : Venue
+    suspend fun getRevenueDetail(venueId: String) : Flow<Venue>
 }

@@ -31,6 +31,8 @@ interface FourSquareService {
 
     companion object {
         const val baseUrl = "https://api.foursquare.com/v2/"
+        const val client_id = "SG32E3FM4BXEKGYWKKP1VTN4OYHJRIDN0ZBTHEJLLN0PF533"
+        const val client_secret = "VLF2RKWPMME1CWIRRKJOONNQXH5SEBFFHXFCVEUV1DCTZH01"
 
         fun create(): FourSquareService {
             return Retrofit.Builder()

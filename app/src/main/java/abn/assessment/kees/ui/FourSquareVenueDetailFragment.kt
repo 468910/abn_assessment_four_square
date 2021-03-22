@@ -2,9 +2,12 @@ package abn.assessment.kees.ui
 
 import abn.assessment.kees.AbnAssessmentViewModel
 import abn.assessment.kees.R
+import abn.assessment.kees.data.room.VenueRoomModel.Companion.mapFrom
 import abn.assessment.kees.databinding.FragmentFoursquareVenueDetailBinding
 import abn.assessment.kees.domain.models.Venue
+import abn.assessment.kees.ui.model.FourSquareVenueDetailUIModel
 import abn.assessment.kees.ui.model.FourSquareVenueUIModel
+import abn.assessment.kees.ui.model.FourSquareVenueUIModel.Companion.map
 import abn.assessment.kees.util.fragmentViewBinding
 import abn.assessment.kees.util.observe
 import android.os.Bundle
@@ -31,13 +34,15 @@ class FourSquareVenueDetailFragment : Fragment(R.layout.fragment_foursquare_venu
         bindViewModel()
     }
 
-    fun bindViewModel() {
+    private fun bindViewModel() {
         observe(abnAssessmentViewModel.venue) {
-            updateUI(it)
+            updateUI(FourSquareVenueDetailUIModel.map(it))
         }
     }
 
-    fun updateUI(venue: Venue) {
-        binding.venueName.text = venue.name
+    private fun updateUI(uiModel: FourSquareVenueDetailUIModel) {
+        binding.venueName.text = uiModel.titleAndRating
+        binding.phoneNumberLabel.text = uiModel.phoneNumber
+        binding.venueAddress.text = uiModel.address
     }
 }

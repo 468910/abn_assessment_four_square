@@ -30,9 +30,8 @@ class AbnAssessmentViewModel(
 
     val selectedVenueId = MutableStateFlow<String>("")
 
-    val venue = selectedVenueId.filter { it.isNotEmpty() }.map {
-        val venue = getFourSquareVenueDetail.getRevenueDetail(it)
-        venue
+    val venue : LiveData<Venue> = selectedVenueId.filter { it.isNotEmpty() }.flatMapLatest {
+        getFourSquareVenueDetail.getRevenueDetail(it)
     }.asLiveData()
 
 }

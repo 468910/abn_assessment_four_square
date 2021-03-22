@@ -47,17 +47,17 @@ class FourSquareVenueFragment : Fragment(R.layout.fragment_foursquare_venue) {
         })
     }
 
-    fun bindViewModel() {
+    private fun bindViewModel() {
         observe(abnAssessmentViewModel.venues) {
             updateUI(it)
         }
     }
 
-    fun updateUI(list: List<FourSquareVenueUIModel>) {
+    private fun updateUI(list: List<FourSquareVenueUIModel>) {
         fsAdapter.submitList(list)
     }
 
-    fun onVenueSelected(id: String) {
+    private fun onVenueSelected(id: String) {
         abnAssessmentViewModel.selectedVenueId.value = id
         findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
     }
